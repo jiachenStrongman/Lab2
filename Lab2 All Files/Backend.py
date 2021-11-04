@@ -58,11 +58,10 @@ class database:
     def sort(self): #will return a sorted version of the database
         self.carbDB = sqlite3.connect('carbon.db')
         cursor = self.carbDB.cursor()
-        sortTable = '''SELECT COUNTRY, EMISSIONS, DECIMAL
+        sortTable = '''SELECT COUNTRY, DECIMAL
                     FROM carbTable
                     ORDER BY DECIMAL DESC; '''
         cursor.execute(sortTable)
-        print("Database sorted")
         sortDB = cursor.fetchall()
         self.carbDB.commit()
         cursor.close()
@@ -96,3 +95,5 @@ if(countryDB.checkTable()):
                 percent = columns[4].text.strip()
                 decimal = float(percent[:len(percent) - 1]) #i need a decimal value to sort
                 countryDB.insert(country, percent, decimal) #takes data from 5th column since thats the only data i need
+
+
